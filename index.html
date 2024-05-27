@@ -1,9 +1,46 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All About F1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-  <h1>Nuria Shafqat</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
-</body>
+    <header>
+        <h1>All About F1</h1>
+        <div id="upcoming-race">
+            <p>Next Race: Monaco GP - May 29, 2024</p>
+        </div>
+    </header>
+    <main>
+        <section id="intro">
+            <p>Interested in F1 but don't know where to start?
+                <br> You're in the right place!
+                <br> Explore the world of Formula 1, learn about the drivers, and get to know the teams.</p>
+        </section>
+        <section id="navigation">
+            <div class="nav-item">
+                <button onclick="navigateTo('what-is-f1')">What is F1?</button>
+                <img src="https://media4.giphy.com/media/ji6zzUZwNIuLS/200w.gif?cid=6c09b952qjwqwhl2pwhm0gcajphf5guqg1fedd5mefh06s8g&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="What is F1 GIF" class="section-gif">
+            </div>
+            <div class="nav-item">
+                <button onclick="navigateTo('drivers')">Drivers</button>
 
+                <img src="https://64.media.tumblr.com/d22b9e51836022d643fda8146235d945/501a88f75e798c83-89/s540x810/aa014d10dc9761ddf6016b929ea801ae5b5149a1.gifv" alt="Drivers GIF" class="section-gif">
+            </div>
+            <div class="nav-item">
+                <button onclick="navigateTo('teams')">Teams</button>
+
+                <img src="https://media3.giphy.com/media/Irb20yXtA2QStkUnrE/200w.gif?cid=6c09b952djauryqlxe9kz3kzfyzhscgaepn69nmmgfnxwdfz&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="Teams GIF" class="section-gif">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 F1 Website. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
 </html>
+
+
