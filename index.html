@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuria Shafqat · Portfolio</title>
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --surface: #ffffff;
+      --text: #1c1c22;
+      --muted: #5b5b66;
+      --border: #e6e6ec;
+      --accent: #7c5cff;
+      --accent-soft: #efeaff;
+      --accent-dark: #5a3fd6;
+      --shadow: 0 1px 2px rgba(20, 16, 40, 0.04), 0 8px 24px rgba(20, 16, 40, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 247, 249, 0.8);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 62px;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+    .brand span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 96px 0 72px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-photo {
+      width: 240px;
+      height: 240px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: 0 12px 40px rgba(124, 92, 255, 0.22);
+      border: 4px solid var(--surface);
+      justify-self: center;
+    }
+    @media (max-width: 720px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+      .hero-grid .cta-row { justify-content: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-photo {
+        grid-row: 1;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+      }
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin: 0 0 18px;
+      font-weight: 800;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 0 32px;
+    }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 12px 22px;
+      border-radius: 10px;
+      transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(124, 92, 255, 0.35);
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Sections */
+    section { padding: 64px 0; }
+    .section-head { margin-bottom: 36px; }
+    .section-head h2 {
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    /* Featured project */
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .featured-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(124, 92, 255, 0.14);
+    }
+    .featured-shot {
+      background: #0d0d10;
+      display: flex;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+    .featured-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .featured-body {
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .featured-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 12px;
+    }
+    .featured-body h3 { margin: 0 0 10px; font-size: 1.3rem; letter-spacing: -0.02em; }
+    .featured-body p { margin: 0 0 16px; color: var(--muted); font-size: 0.95rem; }
+    @media (max-width: 760px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-shot { max-height: 320px; }
+    }
+
+    /* Projects */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(124, 92, 255, 0.14);
+    }
+    .card .icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.2rem; letter-spacing: -0.01em; }
+    .card p { margin: 0 0 16px; color: var(--muted); font-size: 0.95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .card-link {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+    .card-link:hover { color: var(--accent-dark); }
+    .card-link::after { content: " →"; }
+    .card-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    /* Experience */
+    .exp-list { display: flex; flex-direction: column; gap: 18px; }
+    .exp-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 14px;
+      padding: 22px 26px;
+      box-shadow: var(--shadow);
+    }
+    .exp-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .exp-top h3 { margin: 0; font-size: 1.1rem; letter-spacing: -0.01em; }
+    .exp-org { color: var(--accent-dark); font-weight: 600; font-size: 0.92rem; }
+    .exp-date { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+    .exp-item p { margin: 8px 0 0; color: var(--muted); font-size: 0.95rem; }
+    .exp-item.has-photo { display: flex; gap: 24px; align-items: center; }
+    .exp-item.has-photo .exp-content { flex: 1; }
+    .exp-photo {
+      width: 220px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .exp-photo.portrait { width: 128px; height: 162px; }
+    @media (max-width: 640px) {
+      .exp-item.has-photo { flex-direction: column; align-items: stretch; }
+      .exp-photo { width: 100%; height: 190px; }
+      .exp-photo.portrait { width: 160px; height: 203px; align-self: center; }
+    }
+
+    /* Skills */
+    .skills-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .skill-group h3 { margin: 0 0 14px; font-size: 1rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 7px 13px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Contact */
+    .contact-card {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-soft) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .contact-card h2 { font-size: 1.9rem; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .contact-card p { color: var(--muted); margin: 0 0 28px; }
+    .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media print {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      header.nav { position: static; }
+      * { box-shadow: none !important; }
+      section { padding: 40px 0; }
+      .featured-card,
+      .card,
+      .exp-item,
+      .skill-group,
+      .contact-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .section-head { break-after: avoid; page-break-after: avoid; }
+      #projects, #experience {
+        break-before: page;
+        page-break-before: always;
+        padding-top: 0;
+      }
+      .hero .cta-row { display: none; }
+      .hero { padding: 48px 0; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 18px; }
+      .nav-links a.hide-sm { display: none; }
+      .hero { padding: 64px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand">Nuria<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#experience" class="hide-sm">Experience</a>
+        <a href="#skills" class="hide-sm">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Available for work</span>
+          <h1>Hi, I'm <span class="accent">Nuria Shafqat</span>.<br />I build at the intersection of tech, design and music.</h1>
+          <p>
+            I'm a Computer Science graduate (First-Class, King's College London) who likes designing and building
+            products, lately with a lot of help from AI tools. My favourite projects are the ones that need taste as
+            much as logic: a DJ mixing tool, a photo-consent flow, a page that just feels nice to use.
+          </p>
+          <p>
+            Outside of code, I've run design and content for a 50-person community as a Notion Campus Leader,
+            published Notion templates used by hundreds of people, and produced video content that's pulled in
+            40k+ views. That same instinct for what makes something feel good to use is what I bring into engineering.
+          </p>
+          <div class="cta-row">
+            <a href="#projects" class="btn btn-primary">View my work</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+        </div>
+        <img class="hero-photo" src="portfolio-image.png" alt="Portrait of Nuria Shafqat" />
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Projects</h2>
+          <p>A few things I've designed and built recently.</p>
+        </div>
+        <article class="featured-card reveal">
+          <div class="featured-shot">
+            <img src="dj-assistant-card.png" alt="DJ Assistant app showing a next-track recommendation for Money Trees by Kendrick Lamar, with BPM and key compatibility analysis" />
+          </div>
+          <div class="featured-body">
+            <span class="featured-label">Featured project</span>
+            <h3>DJ Set Assistant 🎧</h3>
+            <p>An AI-powered mixing companion for DJs, and my deepest dive into AI-assisted development so far. I got into DJing through a love of music rather than theory knowledge, and working out which tracks blend well took me ages, especially since I love mixing R&amp;B and hip-hop, where harmonic conventions are far less established than in house or electronic. So I built the tool I needed.</p>
+            <p>Type in the track you're playing and it recommends the best next song from your own library, scored on BPM match, harmonic key compatibility (Camelot wheel), and vibe. The scoring runs in Python with track data from the MusicBrainz API, and the Claude API generates a plain-English explanation of why the transition works, plus alternatives and a preview of the next three tracks.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Claude API</span>
+              <span class="tag">MusicBrainz API</span>
+            </div>
+            <div class="card-links">
+              <a href="https://djassistant.up.railway.app/" target="_blank" rel="noopener" class="card-link">Try the live demo</a>
+              <a href="https://github.com/nuriahannahshafqat/dj-assistant" target="_blank" rel="noopener" class="card-link">View the code on GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <div class="project-grid">
+          <article class="card reveal">
+            <div class="icon">🔒</div>
+            <h3>Designing for Consent Revocation</h3>
+            <p>My final-year HCI dissertation at King's, sparked by something my friends and I know firsthand: someone in a group photo later wishes it were taken down, but asking feels too awkward to actually do. I explored how photo-sharing platforms could let people take back control of photos they appear in, even after initially being fine with the upload, navigating the tension between one person's privacy and the uploader's rights. I designed an interactive Figma prototype of clear, non-confrontational revocation flows and evaluated it through usability testing and interviews with 10 participants.</p>
+            <p>Key finding: how people want to ask for a photo's removal depends on social closeness: a direct conversation works with close friends, while an indirect route like an anonymous form feels safer with acquaintances.</p>
+            <p><strong>Award:</strong> 78 (First-class)</p>
+            <div class="tags">
+              <span class="tag">HCI Research</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Usability Testing</span>
+            </div>
+            <a href="https://www.figma.com/design/OtRUJJTxZ9M2oXLRGIRhGQ/Individual-Project-Prototype?node-id=0-1&amp;p=f" target="_blank" rel="noopener" class="card-link">Walk through the prototype</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🎛️</div>
+            <h3>Camelot Wheel Explorer</h3>
+            <p>An interactive, neon-glow guide to harmonic mixing, the music theory underpinning DJ Assistant. I built it because I couldn't picture what the Camelot wheel actually meant in music theory, so I made a version you can see and hear: click any of the 24 keys to find out which keys mix cleanly and why, with each key's chord synthesized live in the browser from raw oscillators via the Web Audio API, no audio libraries.</p>
+            <p>Pure SVG and vanilla JavaScript with zero dependencies: fully keyboard-accessible, with a table view, deep-linkable keys, and reduced-motion support.</p>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">SVG</span>
+              <span class="tag">Web Audio API</span>
+            </div>
+            <div class="card-links">
+              <a href="https://nuriahannahshafqat.github.io/camelot-explorer/" target="_blank" rel="noopener" class="card-link">Try it live</a>
+              <a href="https://github.com/nuriahannahshafqat/camelot-explorer" target="_blank" rel="noopener" class="card-link">View the code</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Experience</h2>
+          <p>Roles and adventures beyond the code.</p>
+        </div>
+        <div class="exp-list">
+          <div class="exp-item reveal">
+            <div class="exp-content">
+              <div class="exp-top">
+                <h3>Contributing Developer <span class="exp-org">· Computation Ventures</span></h3>
+                <span class="exp-date">2026 – Present</span>
+              </div>
+              <p>Building features for an AI-integrated platform for venture capital firm workflows. The most recent challenge involved enhancing the app's AI-powered meeting transcription system, adding in-transcript search and background transcription that persists when users navigate away from the app.</p>
+            </div>
+          </div>
+          <div class="exp-item has-photo reveal">
+            <div class="exp-content">
+              <div class="exp-top">
+                <h3>Campus Leader <span class="exp-org">· Notion</span></h3>
+                <span class="exp-date">2024 – 2026</span>
+              </div>
+              <p>Represented Notion on campus, creating social media content and hosting events and workshops of around 50 attendees introducing students to the product, including a workshop at KCL Tech Summit, one of London's largest student-led tech conferences and careers fairs. Also published two Notion templates: a travel diary (5-star rating, 330+ downloads) and a student dashboard for UC Davis students (5-star rating, 60+ downloads).</p>
+            </div>
+            <img class="exp-photo" src="tech-summit-card.jpeg" alt="Nuria presenting a Notion workshop at KCL Tech Summit, with a Project Tracker demo on the projector screen" />
+          </div>
+          <div class="exp-item has-photo reveal">
+            <div class="exp-content">
+              <div class="exp-top">
+                <h3>Social Media Officer <span class="exp-org">· Pakistani Society, King's College London</span></h3>
+                <span class="exp-date">2025 – 2026</span>
+              </div>
+              <p>Ran the society's social media presence, planning and producing content with CapCut and Canva, promoting events, and growing engagement across the community, with one video I produced reaching over 40k views. Creating content week after week strongly developed my video and photo editing skills.</p>
+            </div>
+            <img class="exp-photo portrait" src="pak-soc.jpeg" alt="Event poster designed for a KCL x LSE Pakistani Society games night" />
+          </div>
+          <div class="exp-item has-photo reveal">
+            <div class="exp-content">
+              <div class="exp-top">
+                <h3>Year Abroad <span class="exp-org">· University of California, Davis</span></h3>
+                <span class="exp-date">2024 – 2025</span>
+              </div>
+              <p>Spent a year of my CS degree studying in California, adapting to a new country, culture, and academic system. Coursework included machine learning, where I evaluated models such as Naive Bayes and logistic regression on the UCI consumer purchasing dataset.</p>
+            </div>
+            <img class="exp-photo" src="davis-card.jpg" alt="Nuria standing at the UC Davis campus sign at sunset" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Skills</h2>
+          <p>Tools and technologies I work with day to day.</p>
+        </div>
+        <div class="skills-wrap">
+          <div class="skill-group reveal">
+            <h3>Frontend & Product Engineering</h3>
+            <div class="chips">
+              <span class="chip">HTML/CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Web Audio API</span>
+            </div>
+          </div>
+          <div class="skill-group reveal">
+            <h3>Backend</h3>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">Flask</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">Git</span>
+            </div>
+          </div>
+          <div class="skill-group reveal">
+            <h3>AI, Design & Content</h3>
+            <div class="chips">
+              <span class="chip">Claude API / LLM integration</span>
+              <span class="chip">Figma</span>
+              <span class="chip">AI-assisted prototyping</span>
+              <span class="chip">CapCut</span>
+              <span class="chip">Canva</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <h2>Let's connect</h2>
+          <p>I'm currently open to job and internship opportunities. If you think I'd be a good fit for your team, or just want to say hello, I'd love to hear from you!</p>
+          <div class="contact-links">
+            <a href="mailto:nuriashafqat02@gmail.com" class="btn btn-primary">nuriashafqat02@gmail.com</a>
+            <a href="https://www.linkedin.com/in/nuria-shafqat/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+            <a href="https://github.com/nuriahannahshafqat" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Nuria Shafqat. Designed and built by hand, no template.
+    </div>
+  </footer>
+
+  <script>
+    // Current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reveal-on-scroll animations
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
